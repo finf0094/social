@@ -1,0 +1,19 @@
+.content {
+    background-color: aqua;
+}
+
+
+.profile {
+    margin: 10px 30px;
+    display: flex;
+    gap: 10px;
+}
+.profile img {
+    border-radius: 10px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}

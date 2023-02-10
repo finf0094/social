@@ -1,0 +1,10 @@
+.header {
+    background-color: greenyellow;
+    display: flex;
+    align-items: center;   
+    justify-content: space-between;
+}
+
+.header img {
+    width: 50px;
+}
