@@ -3,13 +3,22 @@ import Navigation from '../Navigation/Navigation'
 import Content from '../Content/Content'
 
 import './app.css'
+import Dialogs from '../Dialogs/Dialogs'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 const App = () => {
     return (
         <div className='App'>
-            <Header className="header"/>
-            <Navigation className="nav"/>
-            <Content className="content"/>
+            <BrowserRouter>
+                <Header className="header" />
+                <Navigation className="nav" />
+                <div className="app-wrapper-content">
+                    <Routes>
+                        <Route path="/dialogs/*" element={<Dialogs />} />
+                        <Route path="/profile" element={<Content />} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
         </div>
     )
 }

@@ -1,0 +1,27 @@
+.post {
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+}
+
+.post img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+.postComment {
+    display: flex;
+    flex-direction: column;
+}
+.postComment img {
+    width: 30px;
+    height: 30px;
+}
+.likes {
+    display: flex;
+    gap: 5px;
+}
+.like {
+    color: white;
+    font-size: 14px;
+}

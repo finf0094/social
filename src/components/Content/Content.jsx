@@ -1,25 +1,32 @@
-import './Content.css'
+import s from'./Content.module.css'
+import Post from './Posts/Post';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 function Content() {
     return ( 
-        <div className="content">
-            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="content img" srcset="" width={1000} height={300} />
-            <div className="profile">
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="profile img" srcset="" width={200} height={200} />
-                <div className='profile-info'>
-                    <h3 className="name">Dmitriy K.</h3>
-                    <p>Data of Birthday: </p>
-                    <p>City: </p>
-                    <p>Education: </p>
-                </div>
-            </div>
-            <form className="add-post">
-                <h1>My posts</h1>
-                <input type="text" name="" id="" placeholder="Напишите пост" />
-                <button>Add</button>
-            </form>
-            <div className="posts">
+        <div className={s.content}>
+            <img src="https://www.pluggedin.ru/images/1-bigTopImage_2022_03_11_18_25_54.jpg" alt="content img" srcset="" width={1000} height={300}/>
 
+            <ProfileInfo />
+
+            <div className={s.addPost}>
+                <h1>My posts</h1>
+                <form className={s.postInput}>
+                    <input type="text" name="" id="" placeholder="Напишите пост" />
+                    <button className={s.btn}>Add</button>
+                </form>  
+            </div>
+
+            <div className={s.posts}>
+                <Post postName="Hello world"
+                 postDescr="Hello world this is my first post guyyyyss"
+                 imgSrc="https://bipbap.ru/wp-content/uploads/2022/11/1652235714_41-kartinkin-net-p-prikolnie-kartinki-dlya-stima-44.jpg"
+                 like="3"/>
+                 <Post postName="YEEEEE BROOO i'm a born"
+                 postDescr="This is my second post and this social network in the best in world YEEEEEEEEEEEEE!!!!"
+                 imgSrc="https://i.pinimg.com/736x/3a/9d/0f/3a9d0f6e815b35f98129793d89a997f3.jpg"
+                 like="14" />
+                 
             </div>
         </div>
      );

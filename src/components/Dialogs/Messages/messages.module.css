@@ -1,0 +1,12 @@
+.messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 8px;
+}
+
+.message {
+    color: green;
+    text-shadow: 5px;
+    font-size: 14px;
+}

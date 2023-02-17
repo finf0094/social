@@ -1,0 +1,18 @@
+.DialogUsers a {
+    color: red;
+    text-decoration: none;
+}
+
+.DialogUsers {
+    margin: 5px;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.activeUser {
+    color: gold;
+}
