@@ -1,4 +1,3 @@
-
 const store = {
     _state: {
         dialogs: [
@@ -24,7 +23,7 @@ const store = {
         return this._state;
     },
     _callSubscriber() {
-        console.log()
+        console.log("Store changed")
     },
     addPost() {
         this._state.posts.push({
@@ -35,12 +34,13 @@ const store = {
         this._callSubscriber(this._state)
     },
     updatePostValueInput(value) {
-        this.state.addPostValueInput = value;
+        this._state.addPostValueInput = value;
         this._callSubscriber(this._state);
     },
     subscribe(observer) {
         this._callSubscriber = observer;
-    }
+    },
 }
 
+export default store;
 window.store = store
