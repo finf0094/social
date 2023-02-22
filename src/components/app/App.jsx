@@ -4,21 +4,20 @@ import Content from '../Content/Content'
 
 import './app.css'
 import Dialogs from '../Dialogs/Dialogs'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
-const App = () => {
+
+const App = (props) => {
     return (
         <div className='App'>
-            <BrowserRouter>
-                <Header className="header" />
-                <Navigation className="nav" />
-                <div className="app-wrapper-content">
-                    <Routes>
-                        <Route path="/dialogs/*" element={<Dialogs />} />
-                        <Route path="/profile" element={<Content />} />
-                    </Routes>
-                </div>
-            </BrowserRouter>
+            <Header className="header" />
+            <Navigation className="nav" />
+            <div className="app-wrapper-content">
+                <Routes>
+                    <Route path="/dialogs/*" element={<Dialogs state={props.state} />} />
+                    <Route path="/profile" element={<Content state={props.state} addPost={props.addPost} updatePostValueInput={props.updatePostValueInput} />} />
+                </Routes>
+            </div>
         </div>
     )
 }
