@@ -5,7 +5,7 @@ const initialState = {
             {postName: 'YEEEEE BROOO im a born', desc: 'This is my second post and this social network in the best in world YEEEEEEEEEEEEE!!!!',
             img: 'https://i.pinimg.com/736x/3a/9d/0f/3a9d0f6e815b35f98129793d89a997f3.jpg', like: 14}
         ],
-        addPostValueInput: 'Hello askhat',
+        addPostValueInput: 'Hello'
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -20,7 +20,7 @@ const profileReducer = (state = initialState, action) => {
     } 
     return state
 }
-
+window.initialState = initialState
 export const addPostActionCreator = () => ({type: "ADD-POST"})
 
 export const updatePostValueInputActionCreator = (text) => {
