@@ -1,20 +1,39 @@
+import React from 'react';
+import { sendMessageActionCreator, updateMessageInputActionCreator } from '../../state/dialogsReducer';
 import DialogUsers from './Dialog-users/DialogUsers';
 import s from './dialogs.module.css'
 import Messages from './Messages/Messages';
 
+
+
 const Dialogs = (props) => {
+    const messageElement = React.createRef();
+    const updateSendMessageValueInput = () => {
+        const text = messageElement.current.value;
+        props.dispatch(updateMessageInputActionCreator(text))
+    }
+    const sendMessage = (e) => {
+        e.preventDefault();
+        props.dispatch(sendMessageActionCreator())
+    }
+    const messages = props.dialogsPage.messages.map((message, i) => <Messages message={message.message} key={i}/>)
+    const dialogUsers = props.dialogsPage.dialogs.map((dialog, i) => <DialogUsers name={dialog.name} id={dialog.id} key={i}/>)
     return (
         <div className={s.content}>
             <div className="DialogUsers">
-                <DialogUsers name='Askhat' id='1'/>
-                <DialogUsers name='Kulush' id='2'/>
-                <DialogUsers name='Mako' id='3'/>
-                <DialogUsers name='Aset' id='4'/>
+                { dialogUsers }
             </div>
+
             <div className={s.messages}>
-                <Messages message='how are you!'/>
-                <Messages message='Hi'/>
-                <Messages message='Nessss'/>
+                { messages }
+                <form className={s.sendMessage}>
+                    <input className={s.sendMessageInput}
+                            onChange={updateSendMessageValueInput}
+                            ref={messageElement}
+                            type="text" value={props.dialogsPage.sendMessageValue} 
+                            placeholder="Напишите сообщение"/>
+                    <button onClick={sendMessage} className={s.sendMessageBtn}>Отправить</button>
+                </form>
             </div>
         </div>
     )
