@@ -1,5 +1,6 @@
 import s from './profileInfo.module.css'
 
+
 function ProfileInfo() {
     return ( 
         <div className={s.profile}>

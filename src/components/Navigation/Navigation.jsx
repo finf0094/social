@@ -7,7 +7,8 @@ function Navigation() {
         <div className={s.nav}>
             <ul>
                 <li className={s.item}><NavLink to='/profile' className={setActive}>Profile</NavLink></li>
-                <li className={s.item}><NavLink to='/dialogs' className={setActive}>dialogs</NavLink></li>
+                <li className={s.item}><NavLink to='/dialogs' className={setActive}>Dialogs</NavLink></li>
+                <li className={s.item}><NavLink to='/users' className={setActive}>Users</NavLink></li>
                 <li className={s.item}>News</li>
                 <li className={s.item}>Music</li>
             </ul>

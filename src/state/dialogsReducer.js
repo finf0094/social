@@ -15,12 +15,21 @@ const initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
     if (action.type === 'UPDATE-MESSAGE-INPUT') {
-        state.sendMessageValue = action.text;
+        const stateCopy = {...state}
+        stateCopy.sendMessageValue = action.text;
+        return stateCopy;
     } else if (action.type === 'SEND-MESSAGE') {
-        state.messages.push({
+        const newMessage = {
             message: state.sendMessageValue
-        })
-        state.sendMessageValue = ''
+        }
+        const stateCopy = {...state}
+        stateCopy.messages = [...stateCopy.messages, newMessage]
+        stateCopy.sendMessageValue = ''
+        if (state.sendMessageValue === '') {
+            return state
+        } else {
+            return stateCopy;
+        }
     }
     return state;
 }

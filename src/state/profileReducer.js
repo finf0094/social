@@ -10,21 +10,30 @@ const initialState = {
 
 const profileReducer = (state = initialState, action) => {
     if (action.type === 'ADD-POST') {
-        state.posts.push({
+        const newPost = {
             postName: 'New Post', desc: state.addPostValueInput,
             img: 'https://klike.net/uploads/posts/2019-03/1551511801_1.jpg', like: 0
-        })
-        state.addPostValueInput = ''
+        }
+        const stateCopy = {...state}
+        stateCopy.posts = [...state.posts, newPost]
+        stateCopy.addPostValueInput = ''
+        if (state.addPostValueInput === '') {
+            return state;
+        } else {
+            return stateCopy;
+        }
     } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-        state.addPostValueInput = action.value;
+        const stateCopy = {...state};
+        stateCopy.addPostValueInput = action.value;
+        return stateCopy;
     } 
     return state
 }
-window.initialState = initialState
-export const addPostActionCreator = () => ({type: "ADD-POST"})
+window.initialState = initialState;
+export const addPostActionCreator = () => ({type: "ADD-POST"});
 
 export const updatePostValueInputActionCreator = (text) => {
     return {type: "UPDATE-NEW-POST-TEXT", value: text}
-}
+};
 
 export default profileReducer;
