@@ -86,3 +86,36 @@
   background-color: #298e46;
   box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
 }
+
+.pageNumbers {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.currentPage {
+  font-weight: 700;
+  background-color: rgb(63, 0, 251);
+  color: white;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 1px 6px;
+  transition: 0.2s ease;
+}
+.currentPage:hover {
+  cursor: pointer;
+  background-color:rgb(79, 44, 184);
+}
+
+.pageNum {
+  font-weight: 700;
+  background-color: rgb(226, 0, 251);
+  color: white;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 1px 6px;
+  transition: 0.2s ease;
+}
+.pageNum:hover {
+  background-color: rgb(207, 107, 182);
+  cursor: pointer;
+}
