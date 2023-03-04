@@ -5,8 +5,9 @@ const initialState = {
             // {id: 3, followed: false, fullName: 'Aset Bisenbayev', status: 'i am a boss three', photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1200px-Angular_full_color_logo.svg.png', location: {city: "Nur-sultan", country: "Kazakhstan"}}
         ],
         countUsers: 20,
-        countPage: 5,
-        currentPage: 1
+        countPage: 10,
+        currentPage: 1,
+        isFetching: false
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -37,14 +38,17 @@ const usersReducer = (state = initialState, action) => {
             return {...state, currentPage: action.page}
         case 'SET-COUNT-USERS':
             return {...state, countUsers: action.countUsers}
+        case 'TOGGLE-FETCHING':
+            return {...state, isFetching: action.isFetching}
         default:
             return state;
     }
 }
 
-export const followAC = (userID) => ({type: 'FOLLOW', userID})
-export const unFollowAC = (userID) => ({type: 'UNFOLLOW', userID})
-export const setUsersAC = (users) => ({type: 'SET-USERS', users})
-export const setPageAC = (page) => ({type: 'SET-PAGE', page})
-export const setCountUsersAC = (countUsers) => ({type: 'SET-COUNT-USERS', countUsers})
+export const follow = (userID) => ({type: 'FOLLOW', userID})
+export const unFollow = (userID) => ({type: 'UNFOLLOW', userID})
+export const setUsers = (users) => ({type: 'SET-USERS', users})
+export const setPage = (page) => ({type: 'SET-PAGE', page})
+export const setCountUsers = (countUsers) => ({type: 'SET-COUNT-USERS', countUsers})
+export const toggleIsFetching = (isFetching) => ({type: 'TOGGLE-FETCHING', isFetching})
 export default usersReducer;

@@ -1,16 +1,15 @@
 import s from './profileInfo.module.css'
+import userImage from '../../../assets/image/icon-256x256.png'
 
-
-function ProfileInfo() {
+function ProfileInfo(props) {
     return ( 
         <div className={s.profile}>
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="profile img" srcset="" width={200} height={200} />
+            <img src={props.profile.photos.large ? props.profile.photos.large : userImage} alt="profile img" srcset="" width={200} height={200} />
             <div className={s.profileInfo}>
-                <h3 className={s.name}>Askhat K.</h3>
-                <p>Data of Birthday: 16.12.2004</p>
-                <p>City: Atyrau best city in the worllddddddd</p>
-                <p>Education: PSVK is the worst college in the world</p>
-                <p>About me: I'm a best man in the world i'm a SENIOR Developer</p>
+                <h3 className={s.name}>{props.profile.fullName}</h3>
+                <p>{props.profile.aboutMe}</p>
+                <p>Ищу работу: {props.profile.lookingForAJob ? 'ИЩУ' : 'НЕ ИЩУ'}</p>
+                <p>{props.profile.lookingForAJobDescription}</p>
             </div>
         </div>
      );
