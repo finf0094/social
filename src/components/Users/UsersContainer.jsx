@@ -49,6 +49,7 @@ const mapStateToProps = (state) => {
         countPage: state.usersPage.countPage,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 };
 
@@ -82,6 +83,7 @@ const UsersContainer = connect(mapStateToProps, {
     setPage,
     setCountUsers,
     toggleIsFetching,
+    toggleFetchingFollow
 })(UsersAPIContainer);
 
 export default UsersContainer;
