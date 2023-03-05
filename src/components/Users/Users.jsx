@@ -4,7 +4,6 @@ import Preloader from '../utils/Preloader'
 import { NavLink } from 'react-router-dom'
 import { followAPI, unfollowAPI } from '../../API/api'
 function Users(props) {
-    console.log(props)
     const pagesCount = Math.ceil(props.countUsers / props.countPage)
     const pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -28,15 +27,14 @@ function Users(props) {
                 </div>
                 <div>
                     {u.followed
-                        ? <button className={s.button} disabled={props.followingInProgress} onClick={() => {
-                            props.toggleFetchingFollow(true)
-                            unfollowAPI(u.id).then(res => {props.toggleFetchingFollow(false)})
+                        ? <button className={s.button} disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                            props.toggleFetchingFollow(true, u.id)
+                            unfollowAPI(u.id).then(res => {props.toggleFetchingFollow(false, u.id)})
                             props.unfollow(u.id)
                         }}>unfollow</button>
-                        : <button className={s.button} disabled={props.followingInProgress} onClick={() => {
-                            
-                            props.toggleFetchingFollow(true)
-                            followAPI(u.id).then(res => {props.toggleFetchingFollow(false)})
+                        : <button className={s.button} disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                            props.toggleFetchingFollow(true, u.id)
+                            followAPI(u.id).then(res => {props.toggleFetchingFollow(false, u.id)})
                             props.follow(u.id)
                         }
                         }>follow</button>}
