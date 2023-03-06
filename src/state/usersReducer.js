@@ -1,3 +1,4 @@
+import usersAPI from "../API/api"
 const initialState = {
         users: [
             // {id: 1, followed: false, fullName: 'Askhat Kulush',status: 'i am a boss', photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png', location: {city: "Atyrau", country: "Kazakhstan"}},
@@ -51,11 +52,52 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const follow = (userID) => ({type: 'FOLLOW', userID})
-export const unFollow = (userID) => ({type: 'UNFOLLOW', userID})
+// dispatch's
+export const followSucces = (userID) => ({type: 'FOLLOW', userID})
+export const unFollowSucces = (userID) => ({type: 'UNFOLLOW', userID})
 export const setUsers = (users) => ({type: 'SET-USERS', users})
 export const setPage = (page) => ({type: 'SET-PAGE', page})
 export const setCountUsers = (countUsers) => ({type: 'SET-COUNT-USERS', countUsers})
 export const toggleIsFetching = (isFetching) => ({type: 'TOGGLE-FETCHING', isFetching})
 export const toggleFetchingFollow = (toggleFollow, userID) => ({type: 'TOGGLE-FETCHING-FOLLOW', toggleFollow, userID})
+
+
+// thunk's
+export const getUsers = (countPage, currentPage) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true));
+        usersAPI.getUsers(countPage, currentPage).then(data => {
+                    dispatch(toggleIsFetching(false))
+                    dispatch(setUsers(data.items))
+                    dispatch(setCountUsers(data.totalCount >= 200 ? 200 : data.totalCount))
+                })
+    }
+}
+export const onChangeUsersPage = (countPage, page) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        dispatch(setPage(page))
+        usersAPI.getUsers(countPage, page)
+                .then(data => {
+                    dispatch(toggleIsFetching(false))
+                    dispatch(setUsers(data.items))
+                })
+    }
+}
+
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFetchingFollow(true, userId))
+        usersAPI.unfollow(userId).then(res => {dispatch(toggleFetchingFollow(false, userId))})
+        dispatch(unFollowSucces(userId))
+    }
+}
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFetchingFollow(true, userId))
+        usersAPI.follow(userId).then(res => {dispatch(toggleFetchingFollow(false, userId))})
+        dispatch(followSucces(userId))
+    }
+}
+
 export default usersReducer;

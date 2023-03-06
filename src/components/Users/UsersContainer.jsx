@@ -1,28 +1,17 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import getUsers from "../../API/api";
-import { follow, setCountUsers, setPage, setUsers, unFollow,toggleIsFetching, toggleFetchingFollow } from "../../state/usersReducer";
+import { follow, setPage, unfollow, toggleFetchingFollow, getUsers, onChangeUsersPage } from "../../state/usersReducer";
 import Users from "./Users";
 
 
 class UsersAPIContainer extends Component {
 
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        getUsers(this.props.countPage, this.props.currentPage).then(data => {
-                    this.props.toggleIsFetching(false)
-                    this.props.setUsers(data.items)
-                    this.props.setCountUsers(data.totalCount >= 200 ? 200 : data.totalCount)
-                })
+        this.props.getUsers(this.props.countPage, this.props.currentPage)
     }
+
     onChangeUsers = (p) => {
-        this.props.toggleIsFetching(true)
-        this.props.setPage(p)
-        getUsers(this.props.countPage, this.props.currentPage)
-                .then(data => {
-                    this.props.toggleIsFetching(false)
-                    this.props.setUsers(data.items)
-                })
+        this.props.onChangeUsersPage(this.props.countPage, p)
     }
 
     
@@ -33,7 +22,7 @@ class UsersAPIContainer extends Component {
                       currentPage={this.props.currentPage}
                       onChangeUsers={this.onChangeUsers}
                       follow={this.props.follow}
-                      unfollow={this.props.unFollow}
+                      unfollow={this.props.unfollow}
                       isFetching={this.props.isFetching}
                       followingInProgress={this.props.followingInProgress}
                       toggleFetchingFollow={this.props.toggleFetchingFollow}
@@ -78,12 +67,11 @@ const mapStateToProps = (state) => {
 
 const UsersContainer = connect(mapStateToProps, {
     follow,
-    unFollow,
-    setUsers,
     setPage,
-    setCountUsers,
-    toggleIsFetching,
-    toggleFetchingFollow
+    toggleFetchingFollow,
+    unfollow,
+    getUsers,
+    onChangeUsersPage
 })(UsersAPIContainer);
 
 export default UsersContainer;

@@ -1,3 +1,5 @@
+import { headerAPI } from "../API/api";
+
 const initialState = {
     userAuthData: {
       id: null,
@@ -24,5 +26,11 @@ const initialState = {
   };
   
   export const setAuthUserData = (id, login, email) => ({ type: 'SET-USER-DATA', data: { id, login, email } });
+
+  export const setAuthUser = () => {
+    return (dispatch) => {
+      headerAPI.auth(dispatch(setAuthUserData))
+    }
+  }
   
   export default authReducer;

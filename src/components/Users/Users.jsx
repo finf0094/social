@@ -2,7 +2,8 @@ import s from './users.module.css'
 import userImage from '../../assets/image/icon-256x256.png'
 import Preloader from '../utils/Preloader'
 import { NavLink } from 'react-router-dom'
-import { followAPI, unfollowAPI } from '../../API/api'
+
+
 function Users(props) {
     const pagesCount = Math.ceil(props.countUsers / props.countPage)
     const pages = []
@@ -28,13 +29,9 @@ function Users(props) {
                 <div>
                     {u.followed
                         ? <button className={s.button} disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.toggleFetchingFollow(true, u.id)
-                            unfollowAPI(u.id).then(res => {props.toggleFetchingFollow(false, u.id)})
                             props.unfollow(u.id)
                         }}>unfollow</button>
                         : <button className={s.button} disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.toggleFetchingFollow(true, u.id)
-                            followAPI(u.id).then(res => {props.toggleFetchingFollow(false, u.id)})
                             props.follow(u.id)
                         }
                         }>follow</button>}
