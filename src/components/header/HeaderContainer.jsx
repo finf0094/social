@@ -4,12 +4,10 @@ import { setAuthUser } from '../../state/authReducer';
 import Header from './Header';
 import './header.css'
 class HeaderContainer extends Component {
-    
     componentDidMount() {
         this.props.setAuthUser()
     }
     
-
     render() {
         return <Header {...this.props} />
     }

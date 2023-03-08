@@ -20,13 +20,11 @@ const usersAPI = {
 }
 
 export const headerAPI = {
-    auth: (setAuthUserData) => {
-        instance.get('/auth/me').then(res => {
-            const { id, email, login } = res.data.data
-            setAuthUserData(id, login, email)
-        })
-    }
+    auth: () => instance.get('/auth/me').then(res => res.data.data)
 }
 
+export const profileAPI = {
+    getProfile: (userId) => instance.get(`/profile/${userId}`)
+}
 
 export default usersAPI

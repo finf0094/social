@@ -88,15 +88,23 @@ export const onChangeUsersPage = (countPage, page) => {
 export const unfollow = (userId) => {
     return (dispatch) => {
         dispatch(toggleFetchingFollow(true, userId))
-        usersAPI.unfollow(userId).then(res => {dispatch(toggleFetchingFollow(false, userId))})
-        dispatch(unFollowSucces(userId))
+        usersAPI.unfollow(userId).then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(unFollowSucces(userId))
+            }
+            dispatch(toggleFetchingFollow(false, userId))
+        })
     }
 }
 export const follow = (userId) => {
     return (dispatch) => {
         dispatch(toggleFetchingFollow(true, userId))
-        usersAPI.follow(userId).then(res => {dispatch(toggleFetchingFollow(false, userId))})
-        dispatch(followSucces(userId))
+        usersAPI.follow(userId).then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(followSucces(userId))
+            }
+            dispatch(toggleFetchingFollow(false, userId))
+        })
     }
 }
 

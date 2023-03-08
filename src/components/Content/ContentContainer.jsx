@@ -1,9 +1,9 @@
-import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import Content from './Content';
-import { setProfileAC, addPostActionCreator, updatePostValueInputActionCreator } from '../../state/profileReducer';
+import { setProfileAC, addPostActionCreator, updatePostValueInputActionCreator, setProfile } from '../../state/profileReducer';
 import { useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 
 class ContentContainer extends React.Component {
@@ -12,11 +12,12 @@ class ContentContainer extends React.Component {
         if (!this.props.param.userId) {
             this.props.param.userId = 28241;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.param.userId}`).then(res => this.props.setProfileAC(res.data))
+        this.props.setProfile(this.props.param.userId)
     }
 
     
     render() {
+        if (!this.props.isAuth) return <Navigate to='/login'/>
         return (
             <>
                 <Content {...this.props} profile={this.props.profile}/>
@@ -26,7 +27,8 @@ class ContentContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.userAuthData.isAuth
 })
 
 const TakeParams = (props) => {
@@ -36,5 +38,6 @@ const TakeParams = (props) => {
 export default connect(mapStateToProps, {
     setProfileAC,
     addPostActionCreator,
-    updatePostValueInputActionCreator
+    updatePostValueInputActionCreator,
+    setProfile
 })(TakeParams);

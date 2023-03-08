@@ -28,13 +28,11 @@ function Users(props) {
                 </div>
                 <div>
                     {u.followed
-                        ? <button className={s.button} disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.unfollow(u.id)
-                        }}>unfollow</button>
-                        : <button className={s.button} disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.follow(u.id)
-                        }
-                        }>follow</button>}
+                        ? <button className={s.button} disabled={props.followingInProgress.some(id => id === u.id)}
+                            onClick={() => { props.unfollow(u.id) }}>unfollow</button>
+                        : <button className={s.button} disabled={props.followingInProgress.some(id => id === u.id)}
+                            onClick={() => { props.follow(u.id) }}>follow</button>
+                    }
                 </div>
             </span>
             <span className={s.info}>

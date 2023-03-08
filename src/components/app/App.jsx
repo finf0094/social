@@ -7,6 +7,7 @@ import DialogsContainer from '../Dialogs/DialogsContainer'
 import './app.css'
 import { Route, Routes } from 'react-router-dom'
 import HeaderContainer from '../header/HeaderContainer'
+import Auth from '../Auth/Auth'
 
 
 
@@ -20,6 +21,7 @@ const App = (props) => {
                     <Route path="/dialogs/*" element={<DialogsContainer dialogsPage={props.store.dialogsPage} dispatch={props.dispatch} />} />
                     <Route path="/profile/:userId?" element={<ContentContainer profilePage={props.store.profilePage} dispatch={props.dispatch}/>} />
                     <Route path="/users" element={<UsersContainer/>} />
+                    <Route path="/login" element={<Auth />} />
                 </Routes>
             </div>
         </div>
