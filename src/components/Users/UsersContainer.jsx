@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { follow, setPage, unfollow, toggleFetchingFollow, getUsers, onChangeUsersPage } from "../../state/usersReducer";
+import withAuthRedirect from "../hoc/withAuthRedirect";
 import Users from "./Users";
 
 
@@ -42,36 +44,14 @@ const mapStateToProps = (state) => {
     }
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (userID) => {
-//             return dispatch(followAC(userID))
-//         },
-//         unFollow: (userID) => {
-//             return dispatch(unFollowAC(userID))
-//         },
-//         setUsers: (users) => {
-//             return dispatch(setUsersAC(users))
-//         },
-//         setPage: (page) => {
-//             return dispatch(setPageAC(page))
-//         },
-//         setCountUsers: (countUsers) => {
-//             return dispatch(setCountUsersAC(countUsers))
-//         },
-//         toggleIsFetching: (isFetching) => {
-//             return dispatch(toggleIsFetchingAC(isFetching))
-//         }
-//     }
-// };
-
-const UsersContainer = connect(mapStateToProps, {
-    follow,
-    setPage,
-    toggleFetchingFollow,
-    unfollow,
-    getUsers,
-    onChangeUsersPage
-})(UsersAPIContainer);
-
-export default UsersContainer;
+export default compose(
+    connect(mapStateToProps, {
+        follow,
+        setPage,
+        toggleFetchingFollow,
+        unfollow,
+        getUsers,
+        onChangeUsersPage
+    }),
+    withAuthRedirect
+)(UsersAPIContainer);
