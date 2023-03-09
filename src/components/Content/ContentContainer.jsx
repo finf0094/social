@@ -5,6 +5,7 @@ import { setProfileAC, addPostActionCreator, updatePostValueInputActionCreator, 
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import withAuthRedirect from '../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 class ContentContainer extends Component {
     
@@ -26,23 +27,13 @@ class ContentContainer extends Component {
     }
 }
 
-
-
 const mapStateToProps = (state) => ({
     profile: state.profilePage.profile
 })
-
-
-
-
 const TakeParams = (props) => {
     return <ContentContainer {...props} param={useParams()} />
 }
-const authRedirectComponent = withAuthRedirect(TakeParams)
-
-export default connect(mapStateToProps, {
-    setProfileAC,
-    addPostActionCreator,
-    updatePostValueInputActionCreator,
-    setProfile
-})(authRedirectComponent);
+export default compose(
+    connect(mapStateToProps, {setProfileAC,addPostActionCreator,updatePostValueInputActionCreator,setProfile}),
+    withAuthRedirect
+)(TakeParams)
