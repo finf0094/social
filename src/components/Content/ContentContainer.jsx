@@ -1,12 +1,12 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import Content from './Content';
 import { setProfileAC, addPostActionCreator, updatePostValueInputActionCreator, setProfile } from '../../state/profileReducer';
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import withAuthRedirect from '../hoc/withAuthRedirect';
 
-
-class ContentContainer extends React.Component {
+class ContentContainer extends Component {
     
     componentDidMount() {
         if (!this.props.param.userId) {
@@ -26,18 +26,23 @@ class ContentContainer extends React.Component {
     }
 }
 
+
+
 const mapStateToProps = (state) => ({
-    profile: state.profilePage.profile,
-    isAuth: state.auth.userAuthData.isAuth
+    profile: state.profilePage.profile
 })
+
+
+
 
 const TakeParams = (props) => {
     return <ContentContainer {...props} param={useParams()} />
 }
+const authRedirectComponent = withAuthRedirect(TakeParams)
 
 export default connect(mapStateToProps, {
     setProfileAC,
     addPostActionCreator,
     updatePostValueInputActionCreator,
     setProfile
-})(TakeParams);
+})(authRedirectComponent);
