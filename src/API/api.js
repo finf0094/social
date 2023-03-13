@@ -24,7 +24,11 @@ export const headerAPI = {
 }
 
 export const profileAPI = {
-    getProfile: (userId) => instance.get(`/profile/${userId}`)
+    getProfile: (userId) => instance.get(`/profile/${userId}`),
+
+    getUserStatus: (userId) => instance.get(`/profile/status/${userId}`),
+    
+    updateStatus: (status) => instance.put('/profile/status', {status: status})
 }
 
 export default usersAPI

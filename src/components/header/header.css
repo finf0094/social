@@ -8,3 +8,8 @@
 .header img {
     width: 50px;
 }
+
+.login {
+    color: black;
+    font-size: large;
+}
