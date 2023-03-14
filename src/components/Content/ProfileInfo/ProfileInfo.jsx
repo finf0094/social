@@ -7,7 +7,7 @@ function ProfileInfo(props) {
         <div className={s.profile}>
             <img src={props.profile.photos.large ? props.profile.photos.large : userImage} alt="profile img" srcset="" width={200} height={200} />
             <div className={s.profileInfo}>
-                <ProfileStatus/>
+                <ProfileStatus status={props.status} updateProfileStatus={props.updateProfileStatus}/>
                 <h3 className={s.name}>{props.profile.fullName}</h3>
                 <p>{props.profile.aboutMe}</p>
                 <p>Ищу работу: {props.profile.lookingForAJob ? 'ИЩУ' : 'НЕ ИЩУ'}</p>

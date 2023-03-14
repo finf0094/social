@@ -16,7 +16,7 @@ function Content(props) {
         <div className={s.content}>
             <img src="https://www.pluggedin.ru/images/1-bigTopImage_2022_03_11_18_25_54.jpg" alt="content img" srcset="" width={1000} height={300}/>
 
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateProfileStatus={props.updateProfileStatus}/>
 
             <MyPostsContainer profilePage={props.profilePage} dispatch={props.dispatch}/>
 

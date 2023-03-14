@@ -16,7 +16,8 @@ const initialState = {
     }
   ],
   addPostValueInput: '',
-  profile: null
+  profile: null,
+  status: '123'
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -47,6 +48,11 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         profile: action.profile
       };
+      case 'SET-PROFILE-STATUS':
+      return {
+        ...state,
+        status: action.status
+      };
     default:
       return state;
   }
@@ -59,6 +65,8 @@ export const updatePostValueInputActionCreator = (text) => ({
   value: text
 });
 export const setProfileAC = (profile) => ({ type: 'SET-PROFILE', profile });
+export const setProfileStatusAC = (status) => ({ type: 'SET-PROFILE-STATUS', status });
+
 export default profileReducer;
 
 // thunk's
@@ -66,5 +74,17 @@ export const setProfile = (userId) => {
   return (dispatch) => {
     profileAPI.getProfile(userId).then(res => dispatch(setProfileAC(res.data))
     )
+  }
+}
+
+export const setProfileStatus = (userId) => {
+  return (dispatch) => {
+    profileAPI.getUserStatus(userId).then(res => dispatch(setProfileStatusAC(res.data))
+    )
+  }
+}
+export const updateProfileStatus = (status) => {
+  return (dispatch) => {
+    profileAPI.updateStatus(status).then(res => dispatch(setProfileStatusAC(res.data)))
   }
 }
